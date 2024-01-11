@@ -1,0 +1,57 @@
+//Approach 1
+//Time complexity : O(s) where s is length of string
+//space complexity : O(s)
+
+class Solution {
+public String convert(String s, int numRows) {
+    if(numRows == 1) return s;
+    String[] str = new String[numRows];
+    Arrays.fill(str, "");
+    boolean flag = false;
+
+    int i = 0;
+    for(char c : s.toCharArray()){ 
+        str[i] += c;
+        
+        if(i == 0 || i==numRows-1){
+            flag = !flag;
+        }
+
+        if(flag == true){
+            i++;
+        }else{
+            i--;
+        }
+    }
+    String zigzag = "";
+    for(String v : str){
+        zigzag += v;
+    }
+    return zigzag;
+  }
+}
+
+********************************************************************************************************************************************
+
+Approach 2: Optimal way
+Time complexity : O(s) s is the length of string
+Space complexity : O(s) '''
+
+class Solution {
+    public String convert(String s, int numRows) {
+        if(numRows == 1) return s;
+        String ans = "";
+        int n = s.length();
+        for(int r=0;r<numRows;r++){
+            int increment = 2 * (numRows-1);
+            for(int i=r;i<n;i += increment){
+                ans += s.charAt(i);
+                int mischar = i + increment - 2*r;
+                if(r > 0 && r < numRows-1 && mischar < n){
+                    ans += s.charAt(mischar);
+                }
+            }
+        }
+        return ans;
+    }
+}
