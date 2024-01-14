@@ -32,3 +32,34 @@ class Solution {
         return false;
     }
 }
+
+
+**********************************************************************************************************
+//Approach Optimal Approach
+//T.c : O(N)
+//S.c : O(N)
+
+
+class Solution {
+    int capitalcount;
+    public void capitalcounts(String word){
+        for(int i=0;i<word.length();i++){
+            if(word.charAt(i) >= 'A' && word.charAt(i) <= 'Z'){
+                capitalcount++;
+            }
+        }
+    }
+    public boolean detectCapitalUse(String word) {
+        capitalcount = 0;
+        capitalcounts(word);
+        if(capitalcount == word.length()){
+            return true;
+        }else if(capitalcount == 0){
+            return true;
+        }else if(capitalcount == 1 && Character.isUpperCase(word.charAt(0))){
+            return true;
+        }
+        return false;
+
+    }
+}
