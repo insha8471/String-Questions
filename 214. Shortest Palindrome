@@ -1,0 +1,37 @@
+Approach KMP algo
+Time complexity : O(n);
+Space complexity : O(n)
+
+class Solution {
+    public void computeLPS(String str , int lps[]) {
+        int i=1;
+        int length = 0;
+
+        while(i < str.length()) {
+            if(str.charAt(i) == str.charAt(length)) {
+                length++;
+                lps[i] = length;
+                i++;
+            }else{
+                if(length != 0) {
+                    length  = lps[length-1];
+                }else{
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        }
+    }
+    public String shortestPalindrome(String s) {
+        String revStr = new StringBuilder(s).reverse().toString();
+
+        String string = s + "#" + revStr;
+        int[] LPS = new int[string.length()];
+
+        computeLPS(string, LPS);
+
+        int longestPS = LPS[string.length()-1];
+
+        return revStr.substring(0,revStr.length()-longestPS) + s; 
+    }
+}
